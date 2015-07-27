@@ -6,25 +6,65 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Simple help message
-if [ $1 == "--help" -o $1 == "-h" ]; then
+# Simple usage message
+usage() {
     cat <<-EOF
 	This is Edd, a tiny script allowing clipboard editing
 	Usage: [ctrl-a], ctrl-c, edd, ctrl-v :-)
+	To set up alt-shift-e keyboard shortcut run: edd --shortcut
 	EOF
     exit 0
+}
+
+# Set up keyboard shortcut
+shortcut() {
+    # Prepare command, schema, path and the whole key identification
+    cmd=${EDD_COMMAND:-gnome-terminal --geometry 100x44+400+100 --command edd}
+    schema="org.gnome.settings-daemon.plugins.media-keys"
+    path="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+    key="$schema.custom-keybinding:$path/edd/"
+
+    # Need to append the new key to custom-keybindings list
+    keys=$(gsettings get $schema custom-keybindings)
+    keys=$(echo $keys | sed "s:\]:, '$path/edd/']:")
+    keys=$(echo $keys | sed "s:^\[, :[:")
+
+    # Perform the setting
+    gsettings set $key "name" "Edd" &&
+    gsettings set $key "binding" "<Shift><Alt>e" &&
+    gsettings set $key "command" "$cmd" &&
+    gsettings set $schema "custom-keybindings" "$keys"
+    if [ $? -eq 0 ]; then
+        echo "Shortcut successfully set up"
+        exit 0
+    else
+        echo "Problem with setting up the shortcut"
+        exit 1
+    fi
+}
+
+# Edit the clipboard
+edit() {
+    # Use custom prefix for the temporary file
+    # (to find it easily if something goes wrong)
+    file=$(mktemp /tmp/edd.XXXXXXX)
+
+    # Save the clipboard
+    xclip -selection clipboard -o > $file
+
+    # Edit content
+    $EDITOR $file
+
+    # Read the clipboard
+    # (nohup necessary to serve the content if window closed)
+    nohup xclip -selection clipboard -i < $file &>/dev/null
+}
+
+# Decide what to do
+if [ "$1" == "--help" -o "$1" == "-h" ]; then
+    usage
+elif [ "$1" == "--shortcut" ]; then
+    shortcut
+else
+    edit
 fi
-
-# Use custom prefix for the temporary file
-# (to find it easily if something goes wrong)
-file=$(mktemp /tmp/edd.XXXXXXX)
-
-# Save the clipboard
-xclip -selection clipboard -o > $file
-
-# Edit content
-$EDITOR $file
-
-# Read the clipboard
-# (nohup necessary to serve the content if window closed)
-nohup xclip -selection clipboard -i < $file
