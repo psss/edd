@@ -47,7 +47,7 @@ shortcut() {
 edit() {
     # Use custom prefix for the temporary file
     # (to find it easily if something goes wrong)
-    file=$(mktemp /tmp/edd.XXXXXXX)
+    file=$(mktemp /tmp/edd.XXXXXXX.txt)
 
     # Save the clipboard
     xclip -selection clipboard -o > $file
