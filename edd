@@ -43,6 +43,23 @@ shortcut() {
     fi
 }
 
+# Detect the default text editor
+editor() {
+    # Nothing to be done if user editor set
+    [ -n "$EDITOR" ] && return
+
+    # Check for some most common text editors
+    [ -x "/usr/bin/vim" ] && EDITOR=vim && return
+    [ -x "/usr/bin/gedit" ] && EDITOR=gedit && return
+    [ -x "/usr/bin/vi" ] && EDITOR=vi && return
+    [ -x "/usr/bin/nano" ] && EDITOR=nano && return
+
+    # Bail out otherwise
+    echo >&2 "Sorry, no suitable text editor detected."
+    echo >&2 "Hint: Set \$EDITOR variable to your favorite editor."
+    exit 1
+}
+
 # Edit the clipboard
 edit() {
     # Use custom prefix for the temporary file
@@ -66,5 +83,6 @@ if [ "$1" == "--help" -o "$1" == "-h" ]; then
 elif [ "$1" == "--shortcut" ]; then
     shortcut
 else
+    editor
     edit
 fi
