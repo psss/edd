@@ -1,0 +1,21 @@
+#!/bin/bash
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#   Edd, a tiny script allowing clipboard editing
+#   Author: Petr Splichal <psplicha@redhat.com>
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Use custom prefix for the temporary file
+# (to find it easily if something goes wrong)
+file=$(mktemp /tmp/edd.XXXXXXX)
+
+# Save the clipboard
+xclip -selection clipboard -o > $file
+
+# Edit content
+$EDITOR $file
+
+# Read the clipboard
+# (nohup necessary to serve the content if window closed)
+nohup xclip -selection clipboard -i < $file
