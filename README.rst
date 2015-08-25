@@ -14,6 +14,14 @@ Vim is not around I feel so slow, so inefficient, so cumbersome.
 Thus I created Edd who enables me to use Vim literally anywhere.
 
 
+Summary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Edd is a tiny script which allows to easily edit content of the
+clipboard with a single keyboard shortcut. In this way Edd allows
+you to always use your favorite text editor, wherever you need.
+
+
 Usage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -45,13 +53,28 @@ The default command is this::
     gnome-terminal --geometry 100x44+400+100 --command edd
 
 
-Bugs
+Links
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Fille bugs here: https://github.com/psss/edd/issues/new
+Project page:
+https://psss.fedorapeople.org/edd/
+
+Download:
+http://psss.fedorapeople.org/edd/download/
+
+Copr repo:
+http://copr.fedoraproject.org/coprs/psss/edd/
+
+Git repo:
+https://github.com/psss/edd
+
+File issues:
+https://github.com/psss/edd/issues/new
 
 
-Name
+Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Edd is an abbreviation of "EDit clipboarD".
+edd is the abbreviation of EDit clipboarD.
+
+psss is the nick of Petr Šplíchal (author).
