@@ -60,16 +60,36 @@ editor() {
     exit 1
 }
 
+# Choose from the previously edited files
+list() {
+    i=0
+    for file in `ls -t /tmp/edd.*.txt`; do
+        values[$(($i*2))]=$file
+        values[$(($i*2+1))]=$(head -n 10 $file)
+        i=$(($i+1))
+    done
+    file=$(zenity --list --column File --column Text \
+        --title Edd --text "Choose from previous clipboards" \
+        --width 800 --height 600 \
+        "${values[@]}")
+    edit "$file"
+}
+
 # Edit the clipboard
 edit() {
-    # Use custom prefix for the temporary file
-    # (to find it easily if something goes wrong)
-    file=$(mktemp /tmp/edd.XXXXXXX.txt)
+    if [ ! -e "$1" ]; then
+        # Use custom prefix for the temporary file
+        # (to find it easily if something goes wrong)
+        file=$(mktemp /tmp/edd.XXXXXXX.txt)
 
-    # Save the clipboard (try primary selection first)
-    xclip -selection primary -o > $file
-    if ! [ -s $file ]; then
-        xclip -selection clipboard -o > $file
+        # Save the clipboard (try primary selection first)
+        xclip -selection primary -o > $file
+        if ! [ -s $file ]; then
+            xclip -selection clipboard -o > $file
+        fi
+    else
+        # File from argument exists, edit it
+        file=$1
     fi
 
     # Edit content
@@ -85,6 +105,8 @@ if [ "$1" == "--help" -o "$1" == "-h" ]; then
     usage
 elif [ "$1" == "--shortcut" ]; then
     shortcut
+elif [ "$1" == "--list" ]; then
+    list
 else
     editor
     edit
