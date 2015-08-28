@@ -60,6 +60,24 @@ editor() {
     exit 1
 }
 
+# Save clipboard content into a new temporary file
+save() {
+    # Use custom prefix for the temporary file
+    # (to find it easily if something goes wrong)
+    file=$(mktemp /tmp/edd.XXXXXXX.txt)
+
+    # Save the clipboard (try primary selection first)
+    xclip -selection primary -o > $file
+    if ! [ -s $file ]; then
+        xclip -selection clipboard -o > $file
+    fi
+}
+
+# Select the last edited file
+last() {
+    file=$(ls -t /tmp/edd.*.txt | head -1)
+}
+
 # Choose from the previously edited files
 list() {
     i=0
@@ -74,32 +92,16 @@ list() {
         "${values[@]}")
     # Work around BZ#1060471
     file=$(echo "$file" | sed 's/|.*//')
-    edit "$file"
 }
 
 # Edit the clipboard
 edit() {
-    if [ ! -e "$1" ]; then
-        # Use custom prefix for the temporary file
-        # (to find it easily if something goes wrong)
-        file=$(mktemp /tmp/edd.XXXXXXX.txt)
-
-        # Save the clipboard (try primary selection first)
-        xclip -selection primary -o > $file
-        if ! [ -s $file ]; then
-            xclip -selection clipboard -o > $file
-        fi
-    else
-        # File from argument exists, edit it
-        file=$1
-    fi
-
     # Edit content
-    $EDITOR $file
+    $EDITOR "$file"
 
     # Read the clipboard
     # (nohup necessary to serve the content if window closed)
-    nohup xclip -selection clipboard -i < $file &>/dev/null
+    nohup xclip -selection clipboard -i < "$file" &>/dev/null
 }
 
 # Decide what to do
@@ -107,9 +109,16 @@ if [ "$1" == "--help" -o "$1" == "-h" ]; then
     usage
 elif [ "$1" == "--shortcut" ]; then
     shortcut
-elif [ "$1" == "--list" ]; then
-    list
 else
+    # Detect file to edit or save clipboard content
+    if [ "$1" == "--list" ]; then
+        list
+    elif [ "$1" == "--last" ]; then
+        last
+    else
+        save
+    fi
+    # Detect editor and finally edit
     editor
     edit
 fi
