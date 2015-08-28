@@ -1,7 +1,7 @@
 #!/bin/bash
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-#   Edd, a tiny script allowing clipboard editing
+#   Edd - always use your favorite text editor, anywhere.
 #   Author: Petr Splichal <psplicha@redhat.com>
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -9,9 +9,13 @@
 # Simple usage message
 usage() {
     cat <<-EOF
-	This is Edd, a tiny script allowing clipboard editing
-	Usage: [ctrl-a], ctrl-c, edd, ctrl-v :-)
-	To set up alt-shift-e keyboard shortcut run: edd --shortcut
+	Edd - Always use your favorite text editor, anywhere.
+	Usage: select, edd, ctrl-v
+
+	Available options:
+	 --last ............... open last edited text
+	 --list ............... select text from history list
+	 --shortcut ........... set up alt-shift-e keyboard shortcut
 	EOF
     exit 0
 }

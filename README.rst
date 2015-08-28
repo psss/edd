@@ -18,7 +18,7 @@ Summary
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Edd is a tiny script which allows to easily edit content of the
-clipboard with a single keyboard shortcut. In this way Edd allows
+clipboard with a single keyboard shortcut. In this way Edd enables
 you to always use your favorite text editor, wherever you need.
 
 
@@ -30,14 +30,16 @@ Simple and straightforward::
     select, edd, ctrl-v
 
 
-Shortcut
+Options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To set up a keyboard shortcut Alt-Shift-E run::
+Available command line options are::
 
-    edd --shortcut
+	 --last ............... open last edited text
+	 --list ............... select text from history list
+	 --shortcut ........... set up alt-shift-e keyboard shortcut
 
-This has been tested with the latest gnome shell only.
+Shortcut has been tested with the latest gnome shell only.
 
 
 Environment
