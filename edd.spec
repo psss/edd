@@ -1,5 +1,5 @@
 Name: edd
-Version: 0.1
+Version: 0.2
 Release: 1%{?dist}
 
 Summary: Always use your favorite text editor, anywhere.
@@ -35,5 +35,12 @@ install -pm 644 docs/*.1.gz %{buildroot}%{_mandir}/man1
 %license LICENSE
 
 %changelog
+* Fri Aug 28 2015 Petr Šplíchal <psplicha@redhat.com> 0.2-1
+- Document new options, some adjustments
+- New option --last, some reorganization [fix #1]
+- Work around RHEL7 zenity bug [BZ#1060471]
+- Use the primary mouse selection first [fix #2]
+- Option --list, fixing issue #3
+
 * Tue Aug 25 2015 Petr Šplíchal <psplicha@redhat.com> 0.1-1
 - Initial packaging.
