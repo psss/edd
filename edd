@@ -72,6 +72,8 @@ list() {
         --title Edd --text "Choose from previous clipboards" \
         --width 800 --height 600 \
         "${values[@]}")
+    # Work around BZ#1060471
+    file=$(echo "$file" | sed 's/|.*//')
     edit "$file"
 }
 
