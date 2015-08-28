@@ -66,8 +66,11 @@ edit() {
     # (to find it easily if something goes wrong)
     file=$(mktemp /tmp/edd.XXXXXXX.txt)
 
-    # Save the clipboard
-    xclip -selection clipboard -o > $file
+    # Save the clipboard (try primary selection first)
+    xclip -selection primary -o > $file
+    if ! [ -s $file ]; then
+        xclip -selection clipboard -o > $file
+    fi
 
     # Edit content
     $EDITOR $file

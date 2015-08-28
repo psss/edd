@@ -27,7 +27,7 @@ Usage
 
 Simple and straightforward::
 
-    [ctrl-a], ctrl-c, edd, ctrl-v
+    select, edd, ctrl-v
 
 
 Shortcut
