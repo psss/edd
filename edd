@@ -107,7 +107,8 @@ edit() {
 
     # Read the clipboard
     # (nohup necessary to serve the content if window closed)
-    nohup xclip -selection clipboard -i < "$file" &>/dev/null
+    awk 'NR>1{print PREV} {PREV=$0} END{printf("%s",$0)}' "${file}" \
+        | nohup xclip -selection clipboard -i &>/dev/null
 }
 
 # Decide what to do
