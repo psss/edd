@@ -96,6 +96,8 @@ list() {
         "${values[@]}")
     # Work around BZ#1060471
     file=$(echo "$file" | sed 's/|.*//')
+    # Bail out if no file selected
+    [ -z "$file" ] && exit 0
 }
 
 # Edit the clipboard
