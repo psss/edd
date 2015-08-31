@@ -10,12 +10,12 @@
 usage() {
     cat <<-EOF
 	Edd - Always use your favorite text editor, anywhere.
-	Usage: select, edd, ctrl-v
+	Usage: select, edd, paste
 
 	Available options:
 	 --last ............... open last edited text
 	 --list ............... select text from history list
-	 --shortcut ........... set up alt-shift-e keyboard shortcut
+	 --shortcut ........... set up Alt-Shift-E keyboard shortcut
 	EOF
     exit 0
 }

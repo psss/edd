@@ -27,7 +27,11 @@ Usage
 
 Simple and straightforward::
 
-    select, edd, ctrl-v
+    select, edd, paste
+
+Use Ctrl-V shortcut to paste the updated text. Some applications
+support the Ctrl-Shift-V keyboard shortcut for pasting clipboard
+content as plain text. Try this one if the formatting is broken.
 
 
 Options
@@ -35,9 +39,9 @@ Options
 
 Available command line options are::
 
-	 --last ............... open last edited text
-	 --list ............... select text from history list
-	 --shortcut ........... set up alt-shift-e keyboard shortcut
+	 --last ........... open last edited text
+	 --list ........... select text from history list
+	 --shortcut ....... set up Alt-Shift-E keyboard shortcut
 
 Shortcut has been tested with the latest gnome shell only.
 
