@@ -6,6 +6,13 @@
 #
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+# Default configuration
+EDD_CONFIG=${EDD_CONFIG:-~/.edd}
+EDD_COMMAND=${EDD_COMMAND:-gnome-terminal --command edd}
+
+# Allow to override with user config
+[ -r "$EDD_CONFIG" ] && source "$EDD_CONFIG"
+
 # Simple usage message
 usage() {
     cat <<-EOF
@@ -22,8 +29,7 @@ usage() {
 
 # Set up keyboard shortcut
 shortcut() {
-    # Prepare command, schema, path and the whole key identification
-    cmd=${EDD_COMMAND:-gnome-terminal --geometry 100x44+400+100 --command edd}
+    # Prepare schema, path and the whole key identification
     schema="org.gnome.settings-daemon.plugins.media-keys"
     path="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
     key="$schema.custom-keybinding:$path/edd/"
@@ -36,7 +42,7 @@ shortcut() {
     # Perform the setting
     gsettings set $key "name" "Edd" &&
     gsettings set $key "binding" "<Shift><Alt>e" &&
-    gsettings set $key "command" "$cmd" &&
+    gsettings set $key "command" "$EDD_COMMAND" &&
     gsettings set $schema "custom-keybindings" "$keys"
     if [ $? -eq 0 ]; then
         echo "Shortcut successfully set up"

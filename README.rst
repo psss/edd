@@ -37,26 +37,43 @@ content as plain text. Try this one if the formatting is broken.
 Options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Available command line options are::
+Available command line options are:
 
-	 --last ........... open last edited text
-	 --list ........... select text from history list
-	 --shortcut ....... set up Alt-Shift-E keyboard shortcut
+--last
+    open last edited text
 
-Shortcut has been tested with the latest gnome shell only.
+--list
+    select text from history list
+
+--shortcut
+    set up Alt-Shift-E keyboard shortcut
+
+Note: Shortcut has been tested with the latest gnome shell only.
 
 
-Environment
+Config
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Uses the following two environment variables:
+Edd uses the following environment variables:
 
-* EDITOR — set to the text editor of your choice
-* EDD_COMMAND — command to be executed by the keyboard shortcut
+EDITOR
+    set to the text editor of your choice
 
-The default command is this::
+EDD_CONFIG
+    path to the config file (default: ~/.edd)
 
-    gnome-terminal --geometry 100x44+400+100 --command edd
+EDD_COMMAND
+    command to be executed by the keyboard shortcut
+
+The default command is::
+
+    gnome-terminal --command edd
+
+Use environment variable or config file to customize it::
+
+    EDD_COMMAND="gnome-terminal --geometry 111x44 --command edd"
+
+Note: Run ``edd --shortcut`` to update the command afterwards.
 
 
 Links
