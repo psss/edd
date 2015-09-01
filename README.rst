@@ -62,20 +62,20 @@ The default command is this::
 Links
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Project page:
-https://psss.fedorapeople.org/edd/
-
-Download:
-http://psss.fedorapeople.org/edd/download/
-
-Copr repo:
-http://copr.fedoraproject.org/coprs/psss/edd/
-
-Git repo:
+Git:
 https://github.com/psss/edd
 
-File issues:
-https://github.com/psss/edd/issues/new
+Docs:
+http://edd.readthedocs.org/
+
+Issues:
+https://github.com/psss/edd/issues
+
+Releases:
+https://github.com/psss/edd/releases
+
+Copr:
+http://copr.fedoraproject.org/coprs/psss/edd/
 
 
 Names
