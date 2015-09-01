@@ -1,5 +1,5 @@
 Name: edd
-Version: 0.2
+Version: 0.3
 Release: 1%{?dist}
 
 Summary: Always use your favorite text editor, anywhere.
@@ -35,6 +35,12 @@ install -pm 644 docs/*.1.gz %{buildroot}%{_mandir}/man1
 %license LICENSE
 
 %changelog
+* Tue Sep 01 2015 Petr Šplíchal <psplicha@redhat.com> 0.3-1
+- Support for simple config, documentation update
+- Strip trailing newlines from edited text
+- Bail out if no file selected with --list [fix #5]
+- Document the Ctrl-Shift-V keyboard shortcut
+
 * Fri Aug 28 2015 Petr Šplíchal <psplicha@redhat.com> 0.2-1
 - Document new options, some adjustments
 - New option --last, some reorganization [fix #1]
