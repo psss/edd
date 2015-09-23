@@ -29,27 +29,46 @@ usage() {
 
 # Set up keyboard shortcut
 shortcut() {
-    # Prepare schema, path and the whole key identification
-    schema="org.gnome.settings-daemon.plugins.media-keys"
-    path="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
-    key="$schema.custom-keybinding:$path/edd/"
+    # Parameter: gnome 
+    gnome="$1"
 
-    # Need to append the new key to custom-keybindings list
-    keys=$(gsettings get $schema custom-keybindings)
-    keys=$(echo $keys | sed "s:\]:, '$path/edd/']:")
-    keys=$(echo $keys | sed "s:^\[, :[:")
-
-    # Perform the setting
-    gsettings set $key "name" "Edd" &&
-    gsettings set $key "binding" "<Shift><Alt>e" &&
-    gsettings set $key "command" "$EDD_COMMAND" &&
-    gsettings set $schema "custom-keybindings" "$keys"
-    if [ $? -eq 0 ]; then
-        echo "Shortcut successfully set up"
-        exit 0
+    # Gnome 2
+    if [ $gnome -eq 2 ]; then
+        gconftool-2 -t string -s \
+            /apps/metacity/keybinding_commands/edd "$EDD_COMMAND" &&
+        gconftool-2 -t string -s \
+            /apps/metacity/global_keybindings/run_edd "<Shift><Alt>e"
+        if [ $? -eq 0 ]; then
+            echo "Shortcut successfully set up"
+            exit 0
+        else
+            echo "Problem with setting up the shortcut"
+            exit 1
+        fi
+    # Gnome 3
     else
-        echo "Problem with setting up the shortcut"
-        exit 1
+        # Prepare schema, path and the whole key identification
+        schema="org.gnome.settings-daemon.plugins.media-keys"
+        path="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+        key="$schema.custom-keybinding:$path/edd/"
+
+        # Need to append the new key to custom-keybindings list
+        keys=$(gsettings get $schema custom-keybindings)
+        keys=$(echo $keys | sed "s:\]:, '$path/edd/']:")
+        keys=$(echo $keys | sed "s:^\[, :[:")
+
+        # Perform the setting
+        gsettings set $key "name" "Edd" &&
+        gsettings set $key "binding" "<Shift><Alt>e" &&
+        gsettings set $key "command" "$EDD_COMMAND" &&
+        gsettings set $schema "custom-keybindings" "$keys"
+        if [ $? -eq 0 ]; then
+            echo "Shortcut successfully set up"
+            exit 0
+        else
+            echo "Problem with setting up the shortcut"
+            exit 1
+        fi
     fi
 }
 
@@ -121,7 +140,17 @@ edit() {
 if [ "$1" == "--help" -o "$1" == "-h" ]; then
     usage
 elif [ "$1" == "--shortcut" ]; then
-    shortcut
+    # Detect gnome version
+    if rpm -q gnome-desktop3 &>/dev/null; then
+        gnome="3"
+    elif rpm -q gnome-desktop 2>/dev/null | grep -q gnome-desktop-2; then
+        gnome="2"
+    else
+        echo "Unable to detect gnome version, shortcut not set, exiting."
+        exit 1
+    fi
+    # Set up the shortcuts 
+    shortcut $gnome
 else
     # Detect file to edit or save clipboard content
     if [ "$1" == "--list" ]; then
