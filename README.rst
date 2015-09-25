@@ -99,4 +99,4 @@ http://copr.fedoraproject.org/coprs/psss/edd/
 Authors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Petr Šplíchal and Eva Mráková.
+Petr Šplíchal, Branislav Blaškovič, Ryan Brown and Eva Mráková.
