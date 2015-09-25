@@ -20,6 +20,7 @@ Summary
 Edd is a tiny script which allows to easily edit content of the
 clipboard with a single keyboard shortcut. In this way Edd enables
 you to always use your favorite text editor, wherever you need.
+The name ``edd`` is the abbreviation of EDit clipboarD.
 
 
 Usage
@@ -95,9 +96,7 @@ Copr:
 http://copr.fedoraproject.org/coprs/psss/edd/
 
 
-Names
+Authors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-edd is the abbreviation of EDit clipboarD.
-
-psss is the nick of Petr Šplíchal (author).
+Petr Šplíchal and Eva Mráková.
