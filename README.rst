@@ -49,7 +49,7 @@ Available command line options are:
 --shortcut
     set up Alt-Shift-E keyboard shortcut
 
-Note: Shortcut has been tested with the latest gnome shell only.
+Note: Shortcut creation works with Gnome 2 and Gnome 3.
 
 
 Config
