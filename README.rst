@@ -77,6 +77,19 @@ Use environment variable or config file to customize it::
 Note: Run ``edd --shortcut`` to update the command afterwards.
 
 
+Install
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The easiest way is to install the latest packages from copr::
+
+    dnf copr enable psss/edd
+    dnf install edd
+
+However, ``edd`` does not depend on ``rpm`` packaging. It should
+run fine on any Linux distribution. Just make sure ``xclip`` is
+installed on your box, clone the repo and use happily :-)
+
+
 Links
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
