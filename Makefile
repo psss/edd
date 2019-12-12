@@ -47,5 +47,13 @@ push: packages
 		$(TMP)/SOURCES/$(PACKAGE).tar.bz2 \
 		$(PUSH_URL)/download
 
+# Packit stuff
+packit-tarball: tarball
+	mv $(TMP)/SOURCES/$(PACKAGE).tar.bz2 .
+packit-path:
+	@printf "$(PACKAGE).tar.bz2"
+packit-version:
+	@printf "$(VERSION)"
+
 clean:
 	rm -rf $(TMP)
