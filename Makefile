@@ -49,9 +49,7 @@ push: packages
 
 # Packit stuff
 packit-tarball: tarball
-	mv $(TMP)/SOURCES/$(PACKAGE).tar.bz2 .
-packit-path:
-	@printf "$(PACKAGE).tar.bz2"
+	@printf "$(shell realpath $(TMP)/SOURCES/$(PACKAGE).tar.bz2)\n"
 packit-version:
 	@printf "$(VERSION)"
 
