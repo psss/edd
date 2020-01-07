@@ -28,6 +28,7 @@ build:
 
 tarball: build
 	cd $(TMP) && tar cfj SOURCES/$(PACKAGE).tar.bz2 $(PACKAGE)
+	@printf "$(shell realpath $(TMP)/SOURCES/$(PACKAGE).tar.bz2)\n"
 
 rpm: tarball
 	rpmbuild --define '_topdir $(TMP)' -bb edd.spec
@@ -46,12 +47,6 @@ push: packages
 		$(TMP)/RPMS/noarch/$(PACKAGE)* \
 		$(TMP)/SOURCES/$(PACKAGE).tar.bz2 \
 		$(PUSH_URL)/download
-
-# Packit stuff
-packit-tarball: tarball
-	@printf "$(shell realpath $(TMP)/SOURCES/$(PACKAGE).tar.bz2)\n"
-packit-version:
-	@printf "$(VERSION)"
 
 clean:
 	rm -rf $(TMP)
