@@ -1,5 +1,5 @@
 Name: edd
-Version: 0.3
+Version: 0.4
 Release: 1%{?dist}
 
 Summary: Always use your favorite text editor, anywhere.
@@ -35,6 +35,11 @@ install -pm 644 docs/*.1.gz %{buildroot}%{_mandir}/man1
 %license LICENSE
 
 %changelog
+* Fri Jan 10 2020 Petr Šplíchal <psplicha@redhat.com> - 0.4-1
+- Update shortcut-setting note to mention Gnome 2
+- Simplify error handling, whitespace cleanup
+- Update --shortcut to work also with gnome2
+
 * Tue Sep 01 2015 Petr Šplíchal <psplicha@redhat.com> 0.3-1
 - Support for simple config, documentation update
 - Strip trailing newlines from edited text
