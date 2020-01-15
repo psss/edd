@@ -28,6 +28,7 @@ build:
 
 tarball: build
 	cd $(TMP) && tar cfj SOURCES/$(PACKAGE).tar.bz2 $(PACKAGE)
+	@printf "$(shell realpath $(TMP)/SOURCES/$(PACKAGE).tar.bz2)\n"
 
 rpm: tarball
 	rpmbuild --define '_topdir $(TMP)' -bb edd.spec
